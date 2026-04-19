@@ -91,6 +91,32 @@ public class ProductRepository {
     }
 
     /**
+     * 상품명 키워드 검색
+     *
+     * LIKE 검색을 사용하여 이름에 keyword가 포함된 상품을 조회합니다.
+     */
+    public List<Product> findByNameContaining(String keyword) {
+        return entityManager.createQuery(
+                        "SELECT p FROM Product p LEFT JOIN FETCH p.category " +
+                                "WHERE p.name LIKE :keyword ORDER BY p.id ASC",
+                        Product.class)
+                .setParameter("keyword", "%" + keyword + "%")
+                .getResultList();
+    }
+
+    /**
+     * 카테고리별 상품 조회
+     */
+    public List<Product> findByCategoryId(Long categoryId) {
+        return entityManager.createQuery(
+                        "SELECT p FROM Product p LEFT JOIN FETCH p.category " +
+                                "WHERE p.category.id = :categoryId ORDER BY p.id ASC",
+                        Product.class)
+                .setParameter("categoryId", categoryId)
+                .getResultList();
+    }
+
+    /**
      * 상품 저장 (신규 생성)
      *
      * EntityManager.persist():
