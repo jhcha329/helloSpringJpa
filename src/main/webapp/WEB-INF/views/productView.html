@@ -11,8 +11,6 @@
     <title th:text="|상품 상세 - ${product.name}|">상품 상세</title>
     <style>
         body { font-family: 'Malgun Gothic', Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
-        header { background: #f5f8ff; border: 1px solid #d7e6fb; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; color: #2c3e50; }
-        .header-meta { font-size: 0.95em; line-height: 1.6; }
         h1 { border-bottom: 2px solid #4a90d9; padding-bottom: 10px; color: #2c3e50; }
         .back-btn { display: inline-block; padding: 8px 16px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 24px; }
         .back-btn:hover { background: #545b62; }
@@ -30,16 +28,10 @@
         .btn-edit:hover { background: #ca6f1e; }
         .btn-delete { background: #e74c3c; color: white; border: none; padding: 10px 24px; font-size: 1em; border-radius: 4px; cursor: pointer; }
         .btn-delete:hover { background: #c0392b; }
+        footer { margin-top: 28px; padding-top: 12px; border-top: 1px solid #ddd; font-size: 0.95em; color: #555; }
     </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-meta"
-             th:text="'실습 수행 일시: ' + ${practiceTimestamp} + ' | 학번: 2071027 | 성명: 차재혁'">
-            실습 수행 일시: 2025 년 10 월 15 일 (화) 오후 02:34:17 | 학번: 2071027 | 성명: 차재혁
-        </div>
-    </header>
 
     <h1>상품 상세 정보</h1>
 
@@ -110,6 +102,33 @@
             <button type="submit" class="btn-delete">삭제</button>
         </form>
     </div>
+
+    <footer>
+        <span id="practice-info"></span>
+    </footer>
+
+    <script>
+        const practiceInfo = document.getElementById('practice-info');
+        const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+
+        function pad(value) {
+            return String(value).padStart(2, '0');
+        }
+
+        function updatePracticeInfo() {
+            const now = new Date();
+            const meridiem = now.getHours() < 12 ? '오전' : '오후';
+            const hour12 = now.getHours() % 12 || 12;
+
+            practiceInfo.textContent =
+                `실습 수행 일시: ${now.getFullYear()} 년 ${pad(now.getMonth() + 1)} 월 ${pad(now.getDate())} 일 ` +
+                `(${weekdays[now.getDay()]}) ${meridiem} ${pad(hour12)}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ` +
+                `| 학번: 2071027 | 성명: 차재혁`;
+        }
+
+        updatePracticeInfo();
+        setInterval(updatePracticeInfo, 1000);
+    </script>
 
 </body>
 </html>
