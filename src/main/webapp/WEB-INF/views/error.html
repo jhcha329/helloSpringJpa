@@ -16,7 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="|오류 ${errorCode} - Product Management|">오류 발생</title>
     <style>
-        body { font-family: 'Malgun Gothic', Arial, sans-serif; max-width: 700px; margin: 80px auto; padding: 0 20px; color: #333; text-align: center; }
+        body { font-family: 'Malgun Gothic', Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; color: #333; text-align: center; }
+        header { background: #fff5f5; border: 1px solid #f5c6cb; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; color: #7b241c; text-align: left; }
+        .header-meta { font-size: 0.95em; line-height: 1.6; }
         .error-icon { font-size: 5em; margin-bottom: 16px; }
         .error-code { font-size: 4em; font-weight: bold; color: #e74c3c; margin: 0; line-height: 1; }
         .error-title { font-size: 1.6em; color: #2c3e50; margin: 12px 0 24px; }
@@ -30,6 +32,13 @@
     </style>
 </head>
 <body>
+
+    <header>
+        <div class="header-meta"
+             th:text="'실습 수행 일시: ' + ${practiceTimestamp} + ' | 학번: 2071027 | 성명: 차재혁'">
+            실습 수행 일시: 2025 년 10 월 15 일 (화) 오후 02:34:17 | 학번: 2071027 | 성명: 차재혁
+        </div>
+    </header>
 
     <div class="error-icon">⚠️</div>
 
